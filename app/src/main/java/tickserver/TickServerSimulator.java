@@ -3,12 +3,28 @@
  */
 package tickserver;
 
-public class TickServerSimulator {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+import java.io.IOException;
 
-    public static void main(String[] args) {
-        System.out.println(new TickServerSimulator().getGreeting());
+public class TickServerSimulator {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        System.out.println("Starting Tickserver");
+
+        Server server = ServerBuilder.forPort(50051)
+            .addService(new TickServerImpl())
+            .build();
+
+        server.start();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            server.shutdown();
+        }));
+
+        server.awaitTermination();
+
+        System.out.println("Tickserver stopped");
+
     }
 }

@@ -9,12 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class TickServerSimulatorTest {
 
     @Test
-    void appHasAGreeting() {
-        TickServerSimulator classUnderTest = new TickServerSimulator();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
-    }
-
-    @Test
     void checkJavaVersion() {
         String javaVersionStr = System.getProperty("java.version");
         int dotIndex = javaVersionStr.indexOf(".");
