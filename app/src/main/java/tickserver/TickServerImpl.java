@@ -12,7 +12,7 @@ public class TickServerImpl extends TickerSimulatorServiceImplBase {
   public void startTicker(tickserver.TickerSimulatorRequest request, StreamObserver<tickserver.TickerSimulatorResponse> responseObserver) {
     try {
       if (request.getActive()) {
-        for (var i = 0; i < 10000; i++) {
+        while (!Thread.interrupted()) {
 
           var tick = TickFactory.generateNewTick();
 
@@ -25,12 +25,9 @@ public class TickServerImpl extends TickerSimulatorServiceImplBase {
                   .build();
 
           responseObserver.onNext(response);
-          Thread.sleep(10L);
+          Thread.yield();
        }
       }
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-      Thread.currentThread().interrupt();
     } finally{
       responseObserver.onCompleted();
       logger.info("Stream ended");
