@@ -3,28 +3,25 @@
  */
 package tickserver;
 
-import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class TickServerSimulator {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        System.out.println("Starting Tickserver");
+    static Logger logger = Logger.getLogger(TickServerSimulator.class.getName());
 
-        Server server = ServerBuilder.forPort(50051)
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        logger.info("Starting tickserver ...");
+        var server = ServerBuilder.forPort(50051)
             .addService(new TickServerImpl())
             .build();
-
         server.start();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            server.shutdown();
-        }));
-
+        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
+        logger.info("Tickserver started ... waiting for subscription");
         server.awaitTermination();
 
-        System.out.println("Tickserver stopped");
-
+        logger.info("Shutting down tickserver");
     }
 }
