@@ -1,19 +1,15 @@
 package tickserver;
 
 import io.grpc.stub.StreamObserver;
-import java.util.logging.Logger;
 import tickserver.TickerSimulatorServiceGrpc.TickerSimulatorServiceImplBase;
 
 public class TickServerImpl extends TickerSimulatorServiceImplBase {
 
-  private final Logger logger = Logger.getLogger(TickServerImpl.class.getName());
-
   @Override
   public void startTicker(tickserver.TickerSimulatorRequest request, StreamObserver<tickserver.TickerSimulatorResponse> responseObserver) {
     try {
-      if (request.getActive()) {
-        while (!Thread.interrupted()) {
-
+      // we take the given chunk size and return the corresponding amount of ticks
+      for (var i = 0; i < request.getChunkSize(); i++) {
           var tick = TickFactory.generateNewTick();
 
           tickserver.TickerSimulatorResponse response =
@@ -25,12 +21,9 @@ public class TickServerImpl extends TickerSimulatorServiceImplBase {
                   .build();
 
           responseObserver.onNext(response);
-          Thread.yield();
-       }
       }
     } finally{
       responseObserver.onCompleted();
-      logger.info("Stream ended");
     }
   }
 }
