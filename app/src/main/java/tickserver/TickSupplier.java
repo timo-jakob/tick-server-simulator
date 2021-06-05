@@ -2,26 +2,24 @@ package tickserver;
 
 import java.time.Instant;
 import java.util.Random;
+import java.util.function.Supplier;
 
-class TickFactory {
-
-  private TickFactory() {
-    throw new IllegalStateException("TickFactory class should not be instantiated");
-  }
+class TickSupplier implements Supplier<Tick> {
 
   private static final Random random = new Random();
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
 
-  public static Tick generateNewTick() {
+  @Override
+  public Tick get() {
+
     double nextChance;
     int nextVolume;
 
     nextChance = random.nextDouble();
-    if (nextChance < 0.1) {
-      nextVolume = random.nextInt(100) + 401;
-    } else {
-      nextVolume = random.nextInt(301) + 100;
-    }
+    nextVolume = nextChance < 0.1 ?
+        random.nextInt(100) + 401 :
+        random.nextInt(301) + 100;
+
 
     return new Tick(
         Instant.now(),

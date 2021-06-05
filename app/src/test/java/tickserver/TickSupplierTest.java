@@ -3,13 +3,12 @@ package tickserver;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
-class TickFactoryTest {
+class TickSupplierTest {
 
   @RepeatedTest(100000)
   void generateNewTick() {
-    var tick = TickFactory.generateNewTick();
+    var tick = new TickSupplier().get();
 
     assertTrue(tick.price() >= 100 && tick.price() <= 300);
     assertEquals(1, tick.symbol().length());

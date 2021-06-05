@@ -19,13 +19,13 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter API for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
 
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:30.0-jre'
+    implementation 'com.google.guava:guava:30.1.1-jre'
 
     // grpc (see https://github.com/grpc/grpc-java)
     implementation 'io.grpc:grpc-netty-shaded:1.38.0'
@@ -36,7 +36,7 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.17.1"
+        artifact = "com.google.protobuf:protoc:3.17.2"
     }
     plugins {
         grpc {
