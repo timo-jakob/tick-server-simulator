@@ -78,3 +78,5 @@ jacocoTestReport {
         xml.enabled true
     }
 }
+
+project.tasks["sonarqube"].dependsOn "jacocoTestReport"
