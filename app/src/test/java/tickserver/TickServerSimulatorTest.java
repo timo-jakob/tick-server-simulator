@@ -10,6 +10,6 @@ class TickServerSimulatorTest {
 
     @Test
     void checkJavaVersion() {
-        assertEquals(16, Runtime.version().feature(), "Java 16 needed but bot found.");
+        assertEquals(17, Runtime.version().feature(), "Java 17 needed but bot found.");
     }
 }
