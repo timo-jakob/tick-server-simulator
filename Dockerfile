@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM gradle:7.3.3-jdk17@sha256:823c43fdda6850c7c41035af3512997c7ebc3c7d9c6f67c637fe6cd2f32c1330 as build
+FROM gradle:7.3.3-jdk17@sha256:b0e49b4642c9bd069f4e6f74482f54159b6d76b48d73506801790440f07e3e20 as build
 COPY . /app
 WORKDIR /app
 RUN gradle clean build
