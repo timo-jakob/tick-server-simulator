@@ -4,7 +4,7 @@ COPY . /app
 WORKDIR /app
 RUN gradle clean build
 
-FROM eclipse-temurin:17.0.1_12-jre@sha256:33b0f76c5fabcd2ce02865b1f218f3a74642dc3a84f864870d98152152d43ced as jre
+FROM eclipse-temurin:17.0.1_12-jre@sha256:9ef0e35ee536bbe99496c11da2f462e89805923c04ccd57671685ae1add5e71d as jre
 RUN apt update
 # install dumb-init for proper handling of the process in a container-context
 RUN apt install dumb-init
