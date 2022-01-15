@@ -1,3 +1,9 @@
 plugins {
     id "nebula.release" version "16.0.0"
 }
+
+task buildDocker(type:Exec) {
+    // println(rootProject.name)
+    commandLine 'docker'
+    args 'build', '-t', rootProject.name + ':' + version.toString(), '.'
+}
