@@ -3,7 +3,7 @@ plugins {
 }
 
 task buildDocker(type:Exec) {
-    // println(rootProject.name)
+    // build a docker file with an appropriate version
     commandLine 'docker'
     args 'build', '-t', rootProject.name + ':' + version.toString(), '.'
 }
