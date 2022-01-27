@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.1_12-jre@sha256:ad4d74a6a02e6dc855c298f2182fcb22eb1415dbd3e457985967dd49ff6bb7e6 as jre
+FROM eclipse-temurin:17.0.1_12-jre@sha256:51c2f3da38ce100fd8066315b6870061d2700068e41c63cbbbdb8ab94d32d8d3 as jre
 RUN apt update
 # install dumb-init for proper handling of the process in a container-context
 RUN apt install dumb-init
