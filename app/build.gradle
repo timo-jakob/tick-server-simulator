@@ -21,7 +21,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'com.google.guava:guava:31.1-jre'
 
     // grpc (see https://github.com/grpc/grpc-java)
     implementation "io.grpc:grpc-netty-shaded:${grpcVersion}"
