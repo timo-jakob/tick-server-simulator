@@ -2,7 +2,7 @@ plugins {
     id 'application'
     id "org.sonarqube" version "3.4.0.2513"
     id 'jacoco'
-    id 'com.google.protobuf' version '0.8.19'
+    id 'com.google.protobuf' version '0.9.1'
 }
 
 repositories {
