@@ -81,7 +81,6 @@ jacocoTestReport {
 
 jacoco {
     toolVersion = "0.8.10"
-    reportsDir = file("$buildDir/jacoco")
 }
 
 project.tasks["sonarqube"].dependsOn "jacocoTestReport"
