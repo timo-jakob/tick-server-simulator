@@ -11,8 +11,10 @@ repositories {
     mavenCentral()
 }
 
-def grpcVersion = "1.69.0"
-def protoVersion = "3.25.5"
+ext {
+    grpcVersion = '1.69.0'
+    protoVersion = '4.29.2'
+}
 
 dependencies {
     // This dependency is used by the application.
@@ -23,6 +25,10 @@ dependencies {
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
     compileOnly "org.apache.tomcat:annotations-api:6.0.53" // necessary for Java 9+
+
+
+    implementation "com.google.protobuf:protobuf-java:${protoVersion}"
+    implementation "com.google.protobuf:protobuf-java-util:${protoVersion}"
 }
 
 protobuf {
