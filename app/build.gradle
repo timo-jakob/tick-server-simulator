@@ -12,7 +12,7 @@ repositories {
 }
 
 def grpcVersion = "1.69.0"
-def protoVersion = "3.25.5"
+def protoVersion = "4.29.2"
 
 dependencies {
     // This dependency is used by the application.
