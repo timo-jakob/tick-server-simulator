@@ -11,7 +11,7 @@ repositories {
 }
 
 def grpcVersion = "1.69.0"
-def protoVersion = "3.25.4"
+def protoVersion = "3.25.5"
 
 dependencies {
     // Use JUnit Jupiter API for testing.
