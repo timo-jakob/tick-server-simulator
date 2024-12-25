@@ -3,6 +3,7 @@ plugins {
     id "org.sonarqube" version "6.0.1.5171"
     id 'jacoco'
     id 'com.google.protobuf' version '0.9.4'
+    id 'jvm-test-suite' // Apply the jvm-test-suite plugin
 }
 
 repositories {
@@ -14,12 +15,6 @@ def grpcVersion = "1.69.0"
 def protoVersion = "3.25.4"
 
 dependencies {
-    // Use JUnit Jupiter API for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
-
-    // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:33.4.0-jre'
 
@@ -60,9 +55,12 @@ application {
     mainClass.set("tickserver.TickServerSimulator")
 }
 
-tasks.named('test') {
-    // Use junit platform for unit tests.
-    useJUnitPlatform()
+testing {
+    suites {
+        test {
+            useJUnitJupiter() // Use JUnit Jupiter for testing
+        }
+    }
 }
 
 sonarqube {
