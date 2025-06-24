@@ -1,5 +1,5 @@
 plugins {
-    id "nebula.release" version "20.2.0"
+    id "nebula.release" version "21.0.0"
 }
 
 task buildDocker(type:Exec) {
