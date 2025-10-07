@@ -12,7 +12,7 @@ repositories {
 }
 
 ext {
-    grpcVersion = '1.75.0'
+    grpcVersion = '1.76.0'
     protoVersion = '4.31.1'
 }
 
