@@ -16,16 +16,12 @@ class TickSupplier implements Supplier<Tick> {
     int nextVolume;
 
     nextChance = random.nextDouble();
-    nextVolume = nextChance < 0.1 ?
-        random.nextInt(100) + 401 :
-        random.nextInt(301) + 100;
-
+    nextVolume = nextChance < 0.1 ? random.nextInt(100) + 401 : random.nextInt(301) + 100;
 
     return new Tick(
         Instant.now(),
         random.nextInt(201) + 100,
         nextVolume,
-        Character.toString(ALPHABET.charAt(random.nextInt(26)))
-    );
+        Character.toString(ALPHABET.charAt(random.nextInt(26))));
   }
 }
