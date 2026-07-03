@@ -62,8 +62,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-        # No fetch-depth: 0 here — the SonarCloud job below does its own
-        # checkout with full history. Test runners don't need git blame.
+        with:
+          # Full history: diff-cover needs a merge base with origin/main,
+          # and a shallow PR checkout has none (its parent link is cut).
+          fetch-depth: 0
 
       - name: Setup JDK
         uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
@@ -84,13 +86,6 @@ jobs:
       - name: Install diff-cover (Java — coverage floor)
         if: github.event_name == 'pull_request'
         run: pipx install 'diff-cover>=9'
-      - name: Fetch base ref for diff-cover (Java)
-        if: github.event_name == 'pull_request'
-        env:
-          BASE_REF: ${{ github.base_ref }}
-        run: |
-          git fetch --no-tags --prune --depth=100 origin \
-            "+refs/heads/${BASE_REF}:refs/remotes/origin/${BASE_REF}"
       - name: Coverage floor — 90% on new code (Java)
         if: github.event_name == 'pull_request'
         env:
@@ -252,6 +247,22 @@ jobs:
             echo "do_scan=false" >> "$GITHUB_OUTPUT"
             echo "::notice::No container files changed; skipping image scan (#386). Required 'image' check passes."
           fi
+
+      # The Dockerfile COPYs app/build/distributions/app*.tar — build it
+      # first. Gated like the image builds: every non-PR event, and PRs that
+      # touch container files.
+      - name: Setup JDK (for the distribution build)
+        if: steps.scan_decision.outputs.do_scan == 'true'
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        with:
+          distribution: "temurin"
+          java-version: "21"
+      - name: Setup Gradle (for the distribution build)
+        if: steps.scan_decision.outputs.do_scan == 'true'
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
+      - name: Build distribution tar for the image
+        if: steps.scan_decision.outputs.do_scan == 'true'
+        run: ./gradlew --no-daemon :app:distTar
 
       - name: Set up QEMU (for arm64 emulation)
         uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8 # v4
