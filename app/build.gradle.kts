@@ -1,7 +1,7 @@
 plugins {
     application
     jacoco
-    id("com.google.protobuf") version "0.9.6"
+    id("com.google.protobuf") version "0.10.0"
     `jvm-test-suite`
     id("com.diffplug.spotless") version "7.0.2"
 }
