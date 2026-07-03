@@ -3,7 +3,7 @@ plugins {
     jacoco
     id("com.google.protobuf") version "0.9.6"
     `jvm-test-suite`
-    id("com.diffplug.spotless") version "7.0.2"
+    id("com.diffplug.spotless") version "7.2.1"
 }
 
 repositories {
