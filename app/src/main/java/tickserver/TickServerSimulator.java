@@ -9,19 +9,17 @@ import java.util.logging.Logger;
 
 public class TickServerSimulator {
 
-    static Logger logger = Logger.getLogger(TickServerSimulator.class.getName());
+  static Logger logger = Logger.getLogger(TickServerSimulator.class.getName());
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+  public static void main(String[] args) throws IOException, InterruptedException {
 
-        logger.info("Starting tickserver ...");
-        var server = ServerBuilder.forPort(50051)
-            .addService(new TickServerImpl())
-            .build();
-        server.start();
-        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
-        logger.info("Tickserver started ... waiting for subscription");
-        server.awaitTermination();
+    logger.info("Starting tickserver ...");
+    var server = ServerBuilder.forPort(50051).addService(new TickServerImpl()).build();
+    server.start();
+    Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
+    logger.info("Tickserver started ... waiting for subscription");
+    server.awaitTermination();
 
-        logger.info("Shutting down tickserver");
-    }
+    logger.info("Shutting down tickserver");
+  }
 }

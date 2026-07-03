@@ -1,0 +1,2 @@
+rootProject.name = "tick-server-simulator"
+include("app")

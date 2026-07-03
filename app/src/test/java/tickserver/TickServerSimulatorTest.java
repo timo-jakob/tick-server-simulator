@@ -3,13 +3,14 @@
  */
 package tickserver;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 class TickServerSimulatorTest {
 
-    @Test
-    void checkJavaVersion() {
-        assertEquals(21, Runtime.version().feature(), "Java 21 needed but not found.");
-    }
+  @Test
+  void checkJavaVersion() {
+    assertEquals(21, Runtime.version().feature(), "Java 21 needed but not found.");
+  }
 }
