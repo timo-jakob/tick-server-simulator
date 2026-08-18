@@ -16,7 +16,7 @@ val protoVersion = "4.33.2"
 
 dependencies {
     // This dependency is used by the application.
-    implementation("com.google.guava:guava:33.5.0-jre")
+    implementation("com.google.guava:guava:33.7.1-jre")
 
     // grpc (see https://github.com/grpc/grpc-java)
     implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
