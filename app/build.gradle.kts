@@ -12,7 +12,7 @@ repositories {
 }
 
 val grpcVersion = "1.78.0"
-val protoVersion = "4.33.2"
+val protoVersion = "4.36.1"
 
 dependencies {
     // This dependency is used by the application.
